@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
-    MongooseModule.forRoot(process.env.MONGO_CONNECTION_STRING2),
+    MongooseModule.forRoot(process.env.MONGO_CONNECTION_STRING),
     NotesModule,
     JwtModule.register({
       global: true, 
