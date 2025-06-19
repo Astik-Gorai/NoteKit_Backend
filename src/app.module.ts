@@ -9,8 +9,7 @@ import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [AuthModule,
-    MongooseModule.forRoot('mongodb+srv://astik:123@primarydb.8finuah.mongodb.net/?retryWrites=true&w=majority&appName=PrimaryDB'),
-    // MongooseModule.forRoot('mongodb://localhost:27017/NoteKit'),
+    MongooseModule.forRoot('mongodb://localhost:27017/NoteKit'),
     NotesModule,
     JwtModule.register({
       global: true, 
