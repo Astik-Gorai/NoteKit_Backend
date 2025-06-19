@@ -3,11 +3,12 @@ import { JwtService } from '@nestjs/jwt';
 import { Request, Response, NextFunction } from 'express';
 
 interface CustomRequest extends Request {
-  user?: any;
+  email: string;
+  userId: string
 }
 
 @Injectable()
-export class NotesMiddleware implements NestMiddleware {
+export class AuthMiddleware implements NestMiddleware {
   constructor(private readonly jwtService: JwtService) {
 
     console.log('JwtService injected:', !!this.jwtService);
@@ -25,8 +26,10 @@ export class NotesMiddleware implements NestMiddleware {
     }
     try {
       const decoded = this.jwtService.verify(token);
-      console.log('Decoded JWT:', decoded); // Debug
-      req.user = decoded;
+      console.log('Decoded JWT:', decoded);
+      req.email = decoded.username;
+      req.userId = decoded.userId;
+
       next();
     } catch (error) {
       console.error(error);

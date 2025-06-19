@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
-class Comment {
+export class NoteComment {
   @Prop({ required: true })
-  username: string;
+  user: string;
 
   @Prop({ required: true })
   message: string;
 }
 
-export const CommentSchema = SchemaFactory.createForClass(Comment);
+export const NoteCommentSchema = SchemaFactory.createForClass(NoteComment);

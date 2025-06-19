@@ -15,9 +15,14 @@ export class AuthController {
     return this.authService.signUp(body);
    }
    
-   @Get('login')
+   @Post('login')
    login(@Body() userData: LoginDto): Promise<any>{
       return this.authService.login(userData);
+   }
+
+   @Get()
+   getProfile(@Req() req: Request){
+
    }
 
    @Get('reset-password')
