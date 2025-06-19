@@ -6,15 +6,18 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { NotesModule } from './notes/notes.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ProfileModule } from './profile/profile.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/NoteKit'),
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    MongooseModule.forRoot(process.env.MONGO_CONNECTION_STRING2),
     NotesModule,
     JwtModule.register({
       global: true, 
-      secret: 'jwtSecret',
-      signOptions: { expiresIn: '1h' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.JWT_TOKEN_EXPIRY },
     }),
     ProfileModule
   ],
